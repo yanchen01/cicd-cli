@@ -5,7 +5,6 @@ cicd
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/cicd.svg)](https://npmjs.org/package/cicd)
-[![CircleCI](https://circleci.com/gh/yanchen01/cicd_cli/tree/master.svg?style=shield)](https://circleci.com/gh/yanchen01/cicd_cli/tree/master)
 [![Downloads/week](https://img.shields.io/npm/dw/cicd.svg)](https://npmjs.org/package/cicd)
 [![License](https://img.shields.io/npm/l/cicd.svg)](https://github.com/yanchen01/cicd_cli/blob/master/package.json)
 
@@ -29,8 +28,11 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cicd hello`](#cicd-hello)
-* [`cicd help [COMMAND]`](#cicd-help-command)
+- [cicd](#cicd)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`cicd hello`](#cicd-hello)
+  - [`cicd help [COMMAND]`](#cicd-help-command)
 
 ## `cicd hello`
 
