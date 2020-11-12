@@ -19,7 +19,7 @@ $ npm install -g cicd
 $ cicd COMMAND
 running command...
 $ cicd (-v|--version|version)
-cicd/0.0.0 win32-x64 node-v12.16.1
+cicd/0.0.0 win32-x64 node-v14.15.0
 $ cicd --help [COMMAND]
 USAGE
   $ cicd COMMAND
@@ -28,45 +28,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cicd config`](#cicd-config)
-* [`cicd hello`](#cicd-hello)
+* [`cicd config [REPOOWNER] [REPONAME] [ACCESSTOKEN] [OC_SERVER_URL] [OC_API_TOKEN]`](#cicd-config-repoowner-reponame-accesstoken-oc_server_url-oc_api_token)
 * [`cicd help [COMMAND]`](#cicd-help-command)
 
-## `cicd config`
+## `cicd config [REPOOWNER] [REPONAME] [ACCESSTOKEN] [OC_SERVER_URL] [OC_API_TOKEN]`
 
-Describe the command here
+Configure secrets for the GitHub Actions workflow
 
 ```
 USAGE
-  $ cicd config
+  $ cicd config [REPOOWNER] [REPONAME] [ACCESSTOKEN] [OC_SERVER_URL] [OC_API_TOKEN]
 
 OPTIONS
-  -n, --name=name  name to print
+  -a, --accessToken=accessToken      GitHub Access Token with repo access
+  -n, --repoName=repoName            name of GitHub repo
+  -o, --repoOwner=repoOwner          owner of GitHub repo
+  -s, --OC_SERVER_URL=OC_SERVER_URL  OpenShift server url
+  -t, --OC_API_TOKEN=OC_API_TOKEN    Openshift API token
 
 DESCRIPTION
-  ...
-  Extra documentation goes here
+  Enter your credentials and it will be encrypted
 ```
 
 _See code: [src\commands\config.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\config.js)_
-
-## `cicd hello`
-
-Describe the command here
-
-```
-USAGE
-  $ cicd hello
-
-OPTIONS
-  -n, --name=name  name to print
-
-DESCRIPTION
-  ...
-  Extra documentation goes here
-```
-
-_See code: [src\commands\hello.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\hello.js)_
 
 ## `cicd help [COMMAND]`
 
