@@ -52,12 +52,12 @@ class ConfigCommand extends Command {
 				{
 					name: 'OC_SERVER_URL',
 					message: 'Enter the server url',
-					type: 'input'
+					type: 'password'
 				},
 				{
 					name: 'OC_API_TOKEN',
 					message: 'Enter the api token',
-					type: 'input'
+					type: 'password'
 				}
 			]);
 		}
@@ -67,12 +67,6 @@ class ConfigCommand extends Command {
 		OC_SERVER_URL = responses ? responses.OC_SERVER_URL : OC_SERVER_URL;
 		OC_API_TOKEN = responses ? responses.OC_API_TOKEN : OC_API_TOKEN;
 		const secrets = { OC_SERVER_URL: OC_SERVER_URL, OC_API_TOKEN: OC_API_TOKEN };
-
-		this.log(chalk.blue(`the repo owner is ${repoOwner}`));
-		this.log(`the repo name is ${repoName}`);
-		this.log(`the server url is ${secrets.OC_SERVER_URL}`);
-		this.log(`the api token is ${secrets.OC_API_TOKEN}`);
-
 
 		try {
 			createEncryptedSecrets(repoOwner, repoName, accessToken, secrets);
