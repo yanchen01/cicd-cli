@@ -11,6 +11,8 @@
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
     "axios": "^0.21.0",
+    "chalk": "^4.1.0",
+    "inquirer": "^7.3.3",
     "tweetsodium": "0.0.5"
   },
   "devDependencies": {
