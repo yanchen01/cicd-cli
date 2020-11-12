@@ -28,11 +28,27 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-- [cicd](#cicd)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`cicd hello`](#cicd-hello)
-  - [`cicd help [COMMAND]`](#cicd-help-command)
+* [`cicd config`](#cicd-config)
+* [`cicd hello`](#cicd-hello)
+* [`cicd help [COMMAND]`](#cicd-help-command)
+
+## `cicd config`
+
+Describe the command here
+
+```
+USAGE
+  $ cicd config
+
+OPTIONS
+  -n, --name=name  name to print
+
+DESCRIPTION
+  ...
+  Extra documentation goes here
+```
+
+_See code: [src\commands\config.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\config.js)_
 
 ## `cicd hello`
 
