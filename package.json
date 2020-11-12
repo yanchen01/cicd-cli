@@ -9,7 +9,9 @@
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
-    "@oclif/plugin-help": "^3.2.0"
+    "@oclif/plugin-help": "^3.2.0",
+    "axios": "^0.21.0",
+    "tweetsodium": "0.0.5"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
