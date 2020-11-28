@@ -1,8 +1,39 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
+const chalk = require('chalk');
+const inquirer = require('inquirer');
 
 const { Command, flags } = require('@oclif/command');
 
+const generateYAMLWorkflows = function(CIContent, CDContent) {
+	// convert js obj to yaml string
+	let CIYamlStr = yaml.safeDump(CIContent);
+	let CDYamlStr = yaml.safeDump(CDContent);
+
+	// create directory for workflow yaml files
+	fs.mkdir('./.github/workflows', { recursive: true }, function(err) {
+		if (err) {
+			console.error(chalk.red('ERROR creating directories'));
+		} else {
+			console.log(chalk.blue('GitHub Action workflow directory created.'));
+			// write to yaml file
+			fs.writeFile('./.github/workflows/ci.yaml', CIYamlStr, 'utf8', function(err) {
+				if (err) {
+					console.error(chalk.red('ERROR generating CI YAML file'));
+				} else {
+					console.log(chalk.green('CI workflow file created.'));
+				}
+			});
+			fs.writeFile('./.github/workflows/cd.yaml', CDYamlStr, 'utf8', function(err) {
+				if (err) {
+					console.error(chalk.red('ERROR generating CD YAML file'));
+				} else {
+					console.log(chalk.green('CD workflow file created.'));
+				}
+			});
+		}
+	});
+};
 class SetupCommand extends Command {
 	async run() {
 		// Yaml content in object
@@ -146,33 +177,36 @@ class SetupCommand extends Command {
 				}
 			}
 		};
-		// convert js obj to yaml string
-		let CIYamlStr = yaml.safeDump(CIContent);
-		let CDYamlStr = yaml.safeDump(CDContent);
 
-		// create directory for workflow yaml files
-		fs.mkdir('./.github/workflows', { recursive: true }, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log('GitHub Action workflow directory created.');
-				// write to yaml file
-				fs.writeFile('./.github/workflows/ci.yaml', CIYamlStr, 'utf8', function(err) {
-					if (err) {
-						console.log(err);
-					} else {
-						console.log('CI workflow file created.');
-					}
-				});
-				fs.writeFile('./.github/workflows/cd.yaml', CDYamlStr, 'utf8', function(err) {
-					if (err) {
-						console.log(err);
-					} else {
-						console.log('CD workflow file created.');
-					}
-				});
-			}
-		});
+		// select user's choice of formatter
+		inquirer
+			.prompt([
+				{
+					type: 'list',
+					name: 'formatter',
+					message: 'Which of the following auto formatter would you like to use?',
+					choices: [ 'autopep8', 'yapf', 'black' ]
+				}
+			])
+			.then((responses) => {
+				switch (responses.formatter) {
+					case 'autopep8':
+						// autopep8 formatter job
+						CIContent.formatting = {};
+						break;
+					case 'black':
+						// black formatter job
+						CIContent.formatting = {};
+						break;
+					default:
+						// default is yapf
+						break;
+				}
+				generateYAMLWorkflows(CIContent, CDContent);
+			})
+			.catch((err) => {
+				console.error(chalk.red(err));
+			});
 	}
 }
 
@@ -180,9 +214,5 @@ SetupCommand.description = `Setup the CI/CD pipeline
 ...
 This command generates the GitHub Action workflow yaml files to setup the CI/CD pipeline
 `;
-
-SetupCommand.flags = {
-	name: flags.string({ char: 'n', description: 'name to print' })
-};
 
 module.exports = SetupCommand;
