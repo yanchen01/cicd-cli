@@ -3,7 +3,7 @@ const createEncryptedSecrets = require('./encryptSecrets');
 
 const repoOwner = 'yanchen01';
 const repoName = 'cicd-cli';
-const accessToken = '<your access token>';
+const accessToken = 'YOUR TOKEN';
 const secrets = {
 	OC_SERVER_URL: 'localhost',
 	OC_API_TOKEN: '12345'
