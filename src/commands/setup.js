@@ -42,7 +42,7 @@ class SetupCommand extends Command {
 			on: 'pull_request',
 			jobs: {
 				formatting: {
-					name: 'Formatting Python Files',
+					name: 'Autoyapf PEP-8 Formatting',
 					'runs-on': 'ubuntu-latest',
 					steps: [
 						{
@@ -102,21 +102,21 @@ class SetupCommand extends Command {
 				},
 				deployForIT: {
 					needs: 'pyTest',
-					name: 'Deploying Branch to OpenShift for IT',
+					name: 'Deploying Branch to OpenShift for Testing',
 					'runs-on': 'ubuntu-latest',
 					steps: [
 						{
 							uses: 'actions/checkout@v2'
 						},
 						{
-							name: 'Setting up OpenShift Actions',
-							uses: 'redhat-developer/openshift-actions@v2.1.0',
+							name: 'Install OpenShift Actions',
+							uses: 'redhat-actions/oc-installer@v1',
 							with: {
-								version: 'latest'
+								version: '3.11.230'
 							}
 						},
 						{
-							name: 'Executing OC commands',
+							name: 'Executing OC Commands',
 							run:
 								'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc new-app https://www.github.com/${{ github.repository }}#${{ github.head_ref }} --name=${{ github.head_ref }}\n'
 						}
@@ -131,14 +131,14 @@ class SetupCommand extends Command {
 							uses: 'actions/checkout@v2'
 						},
 						{
-							name: 'Setting up OpenShift Actions',
-							uses: 'redhat-developer/openshift-actions@v2.1.0',
+							name: 'Install OpenShift Actions',
+							uses: 'redhat-actions/oc-installer@v1',
 							with: {
-								version: 'latest'
+								version: '3.11.230'
 							}
 						},
 						{
-							name: 'Executing OpenShift commands',
+							name: 'Executing OC Commands',
 							run:
 								'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc delete all --selector app=${{ github.head_ref }}\n'
 						}
@@ -162,14 +162,14 @@ class SetupCommand extends Command {
 							uses: 'actions/checkout@v2'
 						},
 						{
-							name: 'Setting up OpenShift Actions',
-							uses: 'redhat-developer/openshift-actions@v2.1.0',
+							name: 'Install OpenShift Actions',
+							uses: 'redhat-actions/oc-installer@v1',
 							with: {
-								version: 'latest'
+								version: '3.11.230'
 							}
 						},
 						{
-							name: 'Executing OpenShift commands',
+							name: 'Executing OC Commands',
 							run:
 								'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc start-build production --follow || oc new-app https://www.github.com/${{ github.repository }} --name=production\n'
 						}
@@ -185,22 +185,27 @@ class SetupCommand extends Command {
 					type: 'list',
 					name: 'formatter',
 					message: 'Which of the following auto formatter would you like to use?',
-					choices: [ 'autopep8', 'yapf', 'black' ]
+					choices: [ 'yapf', 'black' ]
 				}
 			])
 			.then((responses) => {
-				switch (responses.formatter) {
-					case 'autopep8':
-						// autopep8 formatter job
-						CIContent.formatting = {};
-						break;
-					case 'black':
-						// black formatter job
-						CIContent.formatting = {};
-						break;
-					default:
-						// default is yapf
-						break;
+				if (responses.formatter === 'black') {
+					// black formatter job, default was yapf
+					CIContent.jobs.formatting = {
+						name: 'Black Formatting',
+						'runs-on': 'ubuntu-latest',
+						steps: [
+							{
+								uses: 'actions/checkout@v2'
+							},
+							{
+								uses: 'lgeiger/black-action@master',
+								with: {
+									args: '.'
+								}
+							}
+						]
+					};
 				}
 				generateYAMLWorkflows(CIContent, CDContent);
 			})
