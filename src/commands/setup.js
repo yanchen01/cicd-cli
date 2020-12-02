@@ -171,7 +171,7 @@ class SetupCommand extends Command {
 						{
 							name: 'Executing OC Commands',
 							run:
-								'#!/bin/bash\nrepoName=${{ github.event.repository.name }} | sed 's/[^a-zA-Z0-9]//g'\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc start-build --from-build=$repoName --follow || oc new-app https://www.github.com/${{ github.repository }} --name=$repoName'
+								"#!/bin/bash\nrepoName=${{ github.event.repository.name }} | sed 's/[^a-zA-Z0-9]//g'\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc start-build --from-build=$repoName --follow || oc new-app https://www.github.com/${{ github.repository }} --name=$repoName\n"
 						}
 					]
 				}

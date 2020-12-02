@@ -12,7 +12,7 @@
     "@oclif/plugin-help": "^3.2.0",
     "@octokit/core": "^3.2.1",
     "@octokit/rest": "^18.0.9",
-    "axios": "0.19.0",
+    "axios": "^0.21.0",
     "chalk": "^4.1.0",
     "inquirer": "^7.3.3",
     "js-yaml": "^3.14.0",
