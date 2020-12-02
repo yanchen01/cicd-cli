@@ -40,7 +40,7 @@ function generateEncryptedSecrets(publicKey, secrets) {
 
 	// loop through secrets and encrypt each secret
 	for (secret in secrets) {
-		encryptedSecrets[secret] = encrypt(publicKey, secret);
+		encryptedSecrets[secret] = encrypt(publicKey, secrets[secret]);
 	}
 
 	return encryptedSecrets;
@@ -63,8 +63,6 @@ function createUpdateSecrets(accessToken, publicKeyID, repoOwner, repoName, secr
 			.put(URL, secretObj, { headers })
 			.then((result) => {
 				console.log('Created/Updated Secrets!');
-				console.log(secretObj);
-				console.log(result);
 			})
 			.catch((err) => {
 				console.log(err);
