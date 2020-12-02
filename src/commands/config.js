@@ -67,6 +67,7 @@ class ConfigCommand extends Command {
 		OC_SERVER_URL = responses ? responses.OC_SERVER_URL : OC_SERVER_URL;
 		OC_API_TOKEN = responses ? responses.OC_API_TOKEN : OC_API_TOKEN;
 		const secrets = { OC_SERVER_URL: OC_SERVER_URL, OC_API_TOKEN: OC_API_TOKEN };
+		console.log(secrets);
 
 		try {
 			createEncryptedSecrets(repoOwner, repoName, accessToken, secrets);
