@@ -18,11 +18,11 @@ cicd
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g cicd
+$ npm install -g bucicd
 $ cicd COMMAND
 running command...
 $ cicd (-v|--version|version)
-cicd/0.0.0 win32-x64 node-v12.16.1
+bucicd/0.0.0 win32-x64 node-v12.16.1
 $ cicd --help [COMMAND]
 USAGE
   $ cicd COMMAND
@@ -66,7 +66,7 @@ DESCRIPTION
   Enter your credentials and it will be encrypted
 ```
 
-_See code: [src\commands\config.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\config.js)_
+_See code: [src/commands/config.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src/commands/config.js)_
 
 ## `cicd help [COMMAND]`
 
@@ -83,25 +83,22 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src\commands\help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
 ## `cicd setup`
 
-Describe the command here
+Setup the CI/CD pipeline
 
 ```
 USAGE
   $ cicd setup
 
-OPTIONS
-  -n, --name=name  name to print
-
 DESCRIPTION
   ...
-  Extra documentation goes here
+  This command generates the GitHub Action workflow yaml files to setup the CI/CD pipeline
 ```
 
-_See code: [src\commands\setup.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\setup.js)_
+_See code: [src/commands/setup.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src/commands/setup.js)_
 <!-- commandsstop -->
 * [`cicd config [REPOOWNER] [REPONAME] [ACCESSTOKEN] [OC_SERVER_URL] [OC_API_TOKEN]`](#cicd-config-repoowner-reponame-accesstoken-oc_server_url-oc_api_token)
 * [`cicd help [COMMAND]`](#cicd-help-command)
