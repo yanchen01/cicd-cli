@@ -1,6 +1,7 @@
 /* Import required modules */
 const sodium = require('tweetsodium');
 const axios = require('axios');
+const chalk = require('chalk');
 
 /* Encryption function to encrypt a secret */
 function encrypt(publicKey, secretValue) {
@@ -28,7 +29,7 @@ function configureSecrets(accessToken, repoOwner, repoName) {
 			return result.data;
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error(chalk.red('ERROR config'));
 		});
 
 	return keyObj;
@@ -62,10 +63,10 @@ function createUpdateSecrets(accessToken, publicKeyID, repoOwner, repoName, secr
 		axios
 			.put(URL, secretObj, { headers })
 			.then((result) => {
-				console.log('Created/Updated Secrets!');
+				console.log(chalk.bold.black.bgGreen('Created/Updated Secrets!'));
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(chalk.red('ERROR Update'));
 			});
 	}
 }
@@ -82,7 +83,7 @@ function createEncryptedSecrets(repoOwner, repoName, accessToken, secrets) {
 			createUpdateSecrets(accessToken, publicKeyID, repoOwner, repoName, encryptedSecrets);
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error(chalk.red('ERROR create'));
 		});
 }
 
