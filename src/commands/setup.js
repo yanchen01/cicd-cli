@@ -96,7 +96,7 @@ class SetupCommand extends Command {
 						{
 							name: 'Testing with PyTest',
 							run:
-								'pytest -vv --cov=backend/resources --cov-fail-under=90 -W ignore::DeprecationWarning\n'
+								'pytest -vv --cov-fail-under=90 -W ignore::DeprecationWarning\n'
 						}
 					]
 				},
@@ -117,8 +117,7 @@ class SetupCommand extends Command {
 						},
 						{
 							name: 'Executing OC Commands',
-							run:
-								'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc new-app https://www.github.com/${{ github.repository }}#${{ github.head_ref }} --name=${{ github.head_ref }}\n'
+							run: "#!/bin/bash\nbranchName=`echo ${{ github.head_ref }} | sed -e 's/[^a-z0-9]//g'`\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc new-app https://www.github.com/${{ github.repository }}#${{ github.head_ref }} --name=$branchName\n"
 						}
 					]
 				},
@@ -139,8 +138,7 @@ class SetupCommand extends Command {
 						},
 						{
 							name: 'Executing OC Commands',
-							run:
-								'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc delete all --selector app=${{ github.head_ref }}\n'
+							run: 'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc delete all --selector app=$branchName\n'
 						}
 					]
 				}
@@ -170,8 +168,7 @@ class SetupCommand extends Command {
 						},
 						{
 							name: 'Executing OC Commands',
-							run:
-								"#!/bin/bash\nrepoName=${{ github.event.repository.name }} | sed 's/[^a-zA-Z0-9]//g'\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc start-build --from-build=$repoName --follow || oc new-app https://www.github.com/${{ github.repository }} --name=$repoName\n"
+							run: "#!/bin/bash\nrepoName=`echo ${{ github.event.repository.name }} | sed -e 's/[^a-z0-9]//g'`\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc start-build $repoName --follow || oc new-app https://www.github.com/${{ github.repository }} --name=$repoName\n"
 						}
 					]
 				}
