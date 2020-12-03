@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "Yan Chen, Panat Taranat, Yaopu Wang, Kaito Yamagishi",
   "bin": {
-    "cicd": "./bin/run"
+    "bucicd": "./bin/run"
   },
   "bugs": "https://github.com/yanchen01/cicd_cli/issues",
   "dependencies": {
