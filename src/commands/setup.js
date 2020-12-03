@@ -96,7 +96,7 @@ class SetupCommand extends Command {
 						{
 							name: 'Testing with PyTest',
 							run:
-								'pytest -vv --cov=backend/resources --cov-fail-under=90 -W ignore::DeprecationWarning\n'
+								'pytest -vv --cov-fail-under=90 -W ignore::DeprecationWarning\n'
 						}
 					]
 				},
