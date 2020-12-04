@@ -117,7 +117,7 @@ class SetupCommand extends Command {
 						},
 						{
 							name: 'Executing OC Commands',
-							run: "#!/bin/bash\nbranchName=`(echo ${{ github.head_ref }} | tr '[:upper:]' '[:lower:]') | sed -e 's/[^a-z0-9]//g'`\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc new-app https://www.github.com/${{ github.repository }}#${{ github.head_ref }} --name=$branchName\n"
+							run: "#!/bin/bash\nbranchName=`(echo ${{ github.head_ref }} | tr '[:upper:]' '[:lower:]') | sed -e 's/[^a-z0-9]//g'`\noc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc start-build $branchName --follow || oc new-app https://www.github.com/${{ github.repository }}#${{ github.head_ref }} --name=$branchName\n"
 						}
 					]
 				},
@@ -138,7 +138,7 @@ class SetupCommand extends Command {
 						},
 						{
 							name: 'Executing OC Commands',
-							run: 'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc delete all --selector app=$branchName\n'
+							run: "#!/bin/bash\nbranchName=`(echo ${{ github.head_ref }} | tr '[:upper:]' '[:lower:]') | sed -e 's/[^a-z0-9]//g'`'oc login --token=${{ secrets.OC_API_TOKEN }} --server=${{ secrets.OC_SERVER_URL }}\noc delete all --selector app=$branchName\n"
 						}
 					]
 				}
