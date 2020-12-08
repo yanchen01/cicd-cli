@@ -182,7 +182,7 @@ class SetupCommand extends Command {
 					type: 'list',
 					name: 'formatter',
 					message: 'Which of the following auto formatter would you like to use?',
-					choices: [ 'yapf', 'black' ]
+					choices: [ 'PEP-8', 'black' ]
 				}
 			])
 			.then((responses) => {
