@@ -135,7 +135,7 @@ class SetupCommand extends Command {
 					]
 				},
 				cleaningOC: {
-					needs: 'deployForIT',
+					needs: 'wait',
 					name: 'Cleaning OpenShift Env',
 					'runs-on': 'ubuntu-latest',
 					steps: [
