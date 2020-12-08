@@ -19,7 +19,7 @@ $ npm install -g bucicd
 $ cicd COMMAND
 running command...
 $ cicd (-v|--version|version)
-bucicd/0.0.0 win32-x64 node-v12.16.1
+bucicd/0.0.0 linux-x64 node-v13.14.0
 $ cicd --help [COMMAND]
 USAGE
   $ cicd COMMAND
@@ -51,7 +51,7 @@ DESCRIPTION
   Enter your credentials and it will be encrypted
 ```
 
-_See code: [src\commands\config.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\config.js)_
+_See code: [src/commands/config.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src/commands/config.js)_
 
 ## `cicd help [COMMAND]`
 
@@ -68,7 +68,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src\commands\help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
 ## `cicd setup`
 
@@ -83,5 +83,5 @@ DESCRIPTION
   This command generates the GitHub Action workflow yaml files to setup the CI/CD pipeline
 ```
 
-_See code: [src\commands\setup.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src\commands\setup.js)_
+_See code: [src/commands/setup.js](https://github.com/yanchen01/cicd_cli/blob/v0.0.0/src/commands/setup.js)_
 <!-- commandsstop -->
