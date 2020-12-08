@@ -121,6 +121,19 @@ class SetupCommand extends Command {
 						}
 					]
 				},
+				wait: {
+					needs: 'deployForIT',
+					name: 'Wait One Hour before Deleting Test Deployment',
+					'runs-on': 'ubuntu-latest',
+					steps: [
+						{
+							uses: 'jakejarvis/wait-action@master',
+							with: {
+								time: '30m'
+							}
+						},
+					]
+				},
 				cleaningOC: {
 					needs: 'deployForIT',
 					name: 'Cleaning OpenShift Env',
