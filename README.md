@@ -14,8 +14,10 @@ bucicd
 <!-- tocstop -->
 # Usage
 <!-- usage -->
+After building from source:
 ```sh-session
-$ npm install -g bucicd
+$ npm install
+$ npm link
 $ cicd COMMAND
 running command...
 $ cicd (-v|--version|version)
